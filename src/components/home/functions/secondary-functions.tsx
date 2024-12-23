@@ -1,6 +1,4 @@
 import { Switch } from "@/components/ui/switch";
-import { MenubarDemo } from "./test";
-import GenderSelect from "../settings/gender-select";
 
 export default function SecondaryFunctions() {
   return (
