@@ -17,12 +17,8 @@ export function SelectGenders() {
   // const [isChecked, setIsChecked] = React.useState(false);
 
   return (
-    <Collapsible
-      open={isOpen}
-      onOpenChange={setIsOpen}
-      className="w-[350px] space-y-2"
-    >
-      <div className="flex items-center justify-between space-x-4 px-4">
+    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <div className="flex items-center justify-between px-2">
         <h4 className="text-sm font-semibold">Select Genders to Block</h4>
         <CollapsibleTrigger asChild>
           <Button variant="ghost" size="sm" className="w-9 p-0">
@@ -31,8 +27,8 @@ export function SelectGenders() {
           </Button>
         </CollapsibleTrigger>
       </div>
-      <CollapsibleContent className="space-y-2">
-        <div className="flex rounded-md border p-4 justify-between">
+      <CollapsibleContent>
+        <div className="flex p-2 justify-between">
           {/* <p className="text-sm font-medium leading-none">Genders to Block:</p> */}
           <div className="flex items-center space-x-2">
             <Checkbox defaultChecked id="male" />
@@ -43,8 +39,8 @@ export function SelectGenders() {
             <Label htmlFor="female">Female</Label>
           </div>
           <div className="flex items-center space-x-2">
-            <Checkbox defaultChecked id="no" />
-            <Label htmlFor="unknow">Unknown</Label>
+            <Checkbox defaultChecked id="unknown" />
+            <Label htmlFor="unknown">Unknown</Label>
           </div>
         </div>
       </CollapsibleContent>

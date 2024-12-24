@@ -34,7 +34,7 @@ export default function MainFunctions() {
             <MenubarItem>Name</MenubarItem>
           </MenubarContent>
         </MenubarMenu>
-        <MenubarMenu>
+        {/* <MenubarMenu>
           <MenubarTrigger>Open Tab</MenubarTrigger>
           <MenubarContent>
             <MenubarItem>v1.70os.top</MenubarItem>
@@ -53,7 +53,7 @@ export default function MainFunctions() {
             <MenubarSeparator />
             <MenubarItem>v9.webttt.cn</MenubarItem>
           </MenubarContent>
-        </MenubarMenu>
+        </MenubarMenu> */}
         <MenubarMenu>
           <MenubarTrigger>Quick Phrases</MenubarTrigger>
           <MenubarContent>

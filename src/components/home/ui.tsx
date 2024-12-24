@@ -11,13 +11,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "../ui/input";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import MainFunctions from "./functions/main-functions";
-import SecondaryFunctions from "./functions/secondary-functions";
-import { MenubarDemo } from "./functions/test";
+import SecondaryFunctions from "../page/pause";
 import { SelectGenders } from "./functions/select-genders";
+import { Copy } from "../page/copy";
+import { OpenTab } from "../page/open";
+import { Checkbox } from "../ui/checkbox";
+import { Label } from "../ui/label";
+import Send from "../page/send";
 
 export default function UI() {
   // const [tabs, setTabs] = useState("general");
@@ -41,19 +46,19 @@ export default function UI() {
         <Card>
           <CardHeader>
             <CardTitle className="space-y-2">
-              <SelectGenders />
-              <SecondaryFunctions />
+              <Copy />
+              <div className="rounded-md border p-1 space-y-1">
+                <SelectGenders />
+                <Separator />
+                <SecondaryFunctions />
+              </div>
             </CardTitle>
             {/* <CardDescription>
             </CardDescription> */}
           </CardHeader>
           <CardContent className="space-y-2">
-            {/* <div className="flex">
-                <Label className="font-bold">Functions:</Label>
-              </div>
-              <div className="flex items-center space-x-4 rounded-md border p-4">
-              </div> */}
-            <MainFunctions />
+            <Send />
+            {/* <MainFunctions /> */}
           </CardContent>
           <CardFooter>
             <Button className="w-full">
@@ -66,18 +71,16 @@ export default function UI() {
       <TabsContent value="default">
         <Card>
           <CardHeader>
-            <CardTitle></CardTitle>
-            <CardDescription></CardDescription>
+            <CardTitle>
+              <Copy />
+            </CardTitle>
+            <CardDescription>
+              <Copy />
+            </CardDescription>
           </CardHeader>
           {/* <CardContent className="grid gap-4 space-y-2"></CardContent> */}
           <CardContent className="space-y-2">
-            {/* delete code */}
-            {/* <div className="flex">
-              <Label className="font-bold">Settings:</Label>
-            </div>
-            <div className="rounded-md border p-4 space-y-4">
-              <GenderSelect />
-            </div> */}
+            <Copy />
           </CardContent>
           <CardFooter></CardFooter>
         </Card>
@@ -87,20 +90,24 @@ export default function UI() {
         <Card>
           <CardHeader>
             <CardTitle>
-              <MenubarDemo />
+              <OpenTab />
             </CardTitle>
             {/* <CardDescription></CardDescription> */}
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="flex items-center space-x-2">
-              <Input placeholder="Please enter ID; Random if blank." />
+              <Input placeholder="Enter ID; Random if Blank." />
               <Button>OK</Button>
             </div>
           </CardContent>
           <CardFooter className="flex justify-evenly">
             {/* <div className="flex justify-evenly"> */}
-            <Button>Repeat current name</Button>
-            <Button>Random name</Button>
+            <Button>Repeat Name</Button>
+            <Button>Random Name</Button>
+            <div className="flex items-center space-x-2">
+              <Checkbox id="auto-attack" />
+              <Label htmlFor="auto-attack">Auto Attack</Label>
+            </div>
             {/* </div> */}
           </CardFooter>
         </Card>
