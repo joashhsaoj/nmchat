@@ -15,7 +15,6 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import MainFunctions from "./functions/main-functions";
 import SecondaryFunctions from "../page/pause";
 import { SelectGenders } from "./functions/select-genders";
 import { Copy } from "../page/copy";
