@@ -9,16 +9,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import SecondaryFunctions from "../page/pause";
 import { SelectGenders } from "../page/select-genders";
 import { Copy } from "../page/copy";
 import { OpenTab } from "../page/open";
-import { Checkbox } from "../ui/checkbox";
-import { Label } from "../ui/label";
+
 import Send from "../page/send";
 import StartAndStop from "../page/start-and-pause";
 

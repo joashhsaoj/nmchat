@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { ChevronsUpDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -11,32 +12,40 @@ import {
 } from "@/components/ui/collapsible";
 import { Label } from "@/components/ui/label";
 
-import { ChevronsUpDown } from "lucide-react";
+type Gender = {
+  id: keyof GendersChecked;
+  label: string;
+};
+
+type GendersChecked = {
+  male: boolean;
+  female: boolean;
+  unknown: boolean;
+};
 
 export function SelectGenders() {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const genders = [
+  const genders: Gender[] = [
     { id: "male", label: "Male" },
     { id: "female", label: "Female" },
     { id: "unknown", label: "Unknown" },
-  ] as const;
+  ];
 
-  type GendersChecked = Record<"male" | "female" | "unknown", boolean>;
   const [gendersChecked, setGendersChecked] = React.useState<GendersChecked>({
     male: true,
     female: false,
     unknown: true,
   });
 
-  React.useEffect(() => {
-    window.parent.postMessage(
-      {
-        genders: gendersChecked,
-      },
-      "*"
-    );
-  }, [gendersChecked]);
+  const handleCheckedChange = (gender: keyof GendersChecked) => {
+    console.log(change ${gender});
+    setGendersChecked((prevStates) => ({
+      ...prevStates,
+      [gender]: !prevStates[gender],
+    }));
+    
+  };
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -51,16 +60,14 @@ export function SelectGenders() {
       </div>
       <CollapsibleContent>
         <div className="flex p-2 justify-between">
-          {genders.map(({ id, label }) => (
-            <div key={id} className="flex items-center space-x-2">
+          {genders.map((gender) => (
+            <div key={gender.id} className="flex items-center space-x-2">
               <Checkbox
-                checked={gendersChecked[id]}
-                id={id}
-                onCheckedChange={() =>
-                  setGendersChecked((prev) => ({ ...prev, [id]: !prev[id] }))
-                }
+                checked={gendersChecked[gender.id]}
+                id={gender.id}
+                onCheckedChange={() => handleCheckedChange(gender.id)}
               />
-              <Label htmlFor={id}>{label}</Label>
+              <Label htmlFor={gender.id}>{gender.label}</Label>
             </div>
           ))}
         </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { CirclePlay, CirclePause } from "lucide-react";
 import { Button } from "../ui/button";
@@ -6,15 +6,14 @@ import { Button } from "../ui/button";
 export default function StartAndStop() {
   const [isStarted, setIsStarted] = useState(false);
 
-  const handleButtonClick = () => {
+  useEffect(() => {
     window.parent.postMessage({ state: isStarted ? "START" : "PAUSE" }, "*");
-    setIsStarted(!isStarted);
-  };
+  }, [isStarted]);
 
   return (
     <Button
       className="w-full"
-      onClick={handleButtonClick}
+      onClick={() => setIsStarted(!isStarted)}
       variant={isStarted ? "destructive" : "default"}
     >
       {isStarted ? (

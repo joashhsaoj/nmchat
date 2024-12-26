@@ -1,3 +1,88 @@
+// ==UserScript==
+// @name         Load Next.js Project
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  Load a Next.js project hosted on Vercel into the current page
+// @author       Your Name
+// @match        *://*/*
+// @grant        none
+// ==/UserScript==
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 内部运行
+  if (window.self !== window.top) {
+    return; // 如果在 iframe 内部运行，则退出脚本
+  }
+
+  const container = document.createElement("iframe");
+  container.src = "https://nmchat.vercel.app";
+  container.style.position = "fixed";
+  container.style.top = "0px";
+  container.style.right = "0px";
+  container.style.zIndex = "19991999";
+  container.style.cursor = "move";
+  container.style.width = "400px";
+  container.style.border = "5px solid black";
+  container.style.overflow = "none";
+  //container.style.borderLeft = "10px solid black";
+  //container.style.borderBottom = "10px solid transparent";
+  //container.allow = "fullscreen; clipboard-read; clipboard-write";
+  container.sandbox = "allow-scripts allow-same-origin allow-forms";
+
+  const adjustContainerSize = () => {
+    const body = container.contentDocument.body;
+
+    container.style.width = `${body.scrollWidth + 10}px`;
+    container.style.height = `${body.scrollHeight + 10}px`;
+    console.log(`Width: ${container.style.width + 10}px`);
+    console.log(`Height: ${container.style.height + 10}px`);
+  };
+
+  container.onload = () => {
+    const resizeObserver = new ResizeObserver(adjustContainerSize);
+    resizeObserver.observe(container.contentDocument.body);
+  };
+
+  let isDragging = false;
+  let startX, startY;
+
+  const startDrag = (e) => {
+    isDragging = true;
+    container.style.pointerEvents = "none"; // 暂时禁用鼠标事件
+    startX = (e.clientX || e.touches[0].clientX) - container.offsetLeft;
+    startY = (e.clientY || e.touches[0].clientY) - container.offsetTop;
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", stopDrag);
+    document.addEventListener("touchmove", onMouseMove);
+    document.addEventListener("touchend", stopDrag);
+  };
+
+  const onMouseMove = (e) => {
+    if (isDragging) {
+      container.style.left =
+        (e.clientX || e.touches[0].clientX) - startX + "px";
+      container.style.top = (e.clientY || e.touches[0].clientY) - startY + "px";
+    }
+  };
+
+  const stopDrag = () => {
+    isDragging = false;
+    container.style.pointerEvents = "auto"; // 恢复鼠标事件
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", stopDrag);
+    document.removeEventListener("touchmove", onMouseMove);
+    document.removeEventListener("touchend", stopDrag);
+  };
+
+  container.addEventListener("mousedown", startDrag);
+  container.addEventListener("touchstart", startDrag);
+
+  document.body.appendChild(container);
+
+  const script = document.createElement("script");
+  script.textContent = `
 $("#msg_tips").remove();
 $("#theme_sun_moon").remove();
 $("#colorpicker").remove();
@@ -127,5 +212,47 @@ $(".sysInfo").remove();
 
 //$("#user_count").remove(); //测试是否显示的好友变多
 $("#user_list").css("height", "90%");
+        `;
+  script.onload = () => {
+    console.log("脚本加载成功");
+  };
+  script.onerror = () => {
+    console.error("脚本加载失败");
+  };
+  document.head.appendChild(script);
 
-//$("#btn_random").click();
+  //
+  let intervalId = null;
+
+  intervalId = setInterval(() => {
+    $("#btn_random").click();
+    // warning_Black();
+    // $(".layui-layer-btn0").click();
+  }, 1000);
+
+  window.addEventListener(
+    "message",
+    function (event) {
+      if (event.origin === "https://nmchat.vercel.app") {
+        if (event.data.state === "START") {
+          intervalId = setInterval(() => {
+            $("#btn_random").click();
+            warning_Black();
+            //判断逻辑
+            $(".layui-layer-btn0").click();
+          }, 1000);
+        } else if (event.data.type === "PAUSE") {
+          if (intervalId !== null) {
+            clearInterval(intervalId);
+            intervalId = null;
+          }
+        }
+        // const { male, female, unknown } = data.genders;
+        // console.log("Male:", male);
+        // console.log("Female:", female);
+        // console.log("Unknown:", unknown);
+      }
+    },
+    false
+  );
+})();
