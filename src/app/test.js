@@ -230,7 +230,7 @@ $("#user_list").css("height", "90%");
     "message",
     function (event) {
       if (event.origin === "https://nmchat.vercel.app") {
-        if (event.data.type === "START") {
+        if (event.data.state === "START") {
           intervalId = setInterval(() => {
             $("#btn_random").click();
           }, 1000);
@@ -240,6 +240,9 @@ $("#user_list").css("height", "90%");
             intervalId = null;
           }
         }
+        console.log(event.data.male);
+        console.log(event.data.female);
+        console.log(event.data.unknown);
       }
     },
     false

@@ -14,7 +14,7 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import SecondaryFunctions from "../page/pause";
-import { SelectGenders } from "./functions/select-genders";
+import { SelectGenders } from "../page/select-genders";
 import { Copy } from "../page/copy";
 import { OpenTab } from "../page/open";
 import { Checkbox } from "../ui/checkbox";

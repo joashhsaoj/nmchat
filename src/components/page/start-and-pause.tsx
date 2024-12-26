@@ -7,13 +7,8 @@ export default function StartAndStop() {
   const [isStarted, setIsStarted] = useState(false);
 
   const handleButtonClick = () => {
+    window.parent.postMessage({ state: isStarted ? "START" : "PAUSE" }, "*");
     setIsStarted(!isStarted);
-    window.parent.postMessage({ type: isStarted ? "START" : "PAUSE" }, "*");
-    
-    // window.parent.postMessage(
-    //   { type: "TRIGGER_FUNCTION", message: "Button clicked!" },
-    //   "*"
-    // );
   };
 
   return (

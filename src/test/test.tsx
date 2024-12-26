@@ -12,9 +12,39 @@ import {
 } from "@/components/ui/collapsible";
 import { Label } from "@/components/ui/label";
 
+type Gender = {
+  id: keyof GendersChecked;
+  label: string;
+};
+
+type GendersChecked = {
+  male: boolean;
+  female: boolean;
+  unknown: boolean;
+};
+
 export function SelectGenders() {
   const [isOpen, setIsOpen] = React.useState(false);
-  // const [isChecked, setIsChecked] = React.useState(false);
+
+  const genders: Gender[] = [
+    { id: "male", label: "Male" },
+    { id: "female", label: "Female" },
+    { id: "unknown", label: "Unknown" },
+  ];
+
+  const [gendersChecked, setGendersChecked] = React.useState<GendersChecked>({
+    male: true,
+    female: false,
+    unknown: true,
+  });
+
+  const handleCheckedChange = (gender: keyof GendersChecked) => {
+    console.log(`change ${gender}`);
+    setGendersChecked((prevStates) => ({
+      ...prevStates,
+      [gender]: !prevStates[gender],
+    }));
+  };
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -29,19 +59,16 @@ export function SelectGenders() {
       </div>
       <CollapsibleContent>
         <div className="flex p-2 justify-between">
-          {/* <p className="text-sm font-medium leading-none">Genders to Block:</p> */}
-          <div className="flex items-center space-x-2">
-            <Checkbox defaultChecked id="male" />
-            <Label htmlFor="male">Male</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox id="female" />
-            <Label htmlFor="female">Female</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox defaultChecked id="unknown" />
-            <Label htmlFor="unknown">Unknown</Label>
-          </div>
+          {genders.map((gender) => (
+            <div key={gender.id} className="flex items-center space-x-2">
+              <Checkbox
+                checked={gendersChecked[gender.id]}
+                id={gender.id}
+                onCheckedChange={() => handleCheckedChange(gender.id)}
+              />
+              <Label htmlFor={gender.id}>{gender.label}</Label>
+            </div>
+          ))}
         </div>
       </CollapsibleContent>
     </Collapsible>
