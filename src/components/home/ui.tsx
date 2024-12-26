@@ -20,7 +20,7 @@ import { OpenTab } from "../page/open";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import Send from "../page/send";
-import StartAndStop from "../page/start-and-stop";
+import StartAndStop from "../page/start-and-pause";
 
 export default function UI() {
   // const [tabs, setTabs] = useState("general");

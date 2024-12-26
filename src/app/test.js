@@ -224,12 +224,21 @@ $("#user_list").css("height", "90%");
   document.head.appendChild(script);
 
   //
+  let intervalId = null;
+
   window.addEventListener(
     "message",
     function (event) {
       if (event.origin === "https://nmchat.vercel.app") {
-        if (event.data.type === "TRIGGER_FUNCTION") {
-          console.log(event.data.message);
+        if (event.data.type === "START") {
+          intervalId = setInterval(() => {
+            $("#btn_random").click();
+          }, 1000);
+        } else if (event.data.type === "PAUSE") {
+          if (intervalId !== null) {
+            clearInterval(intervalId);
+            intervalId = null;
+          }
         }
       }
     },
