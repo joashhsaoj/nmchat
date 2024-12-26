@@ -1,7 +1,5 @@
 "use client";
 
-import { CirclePlay } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,6 +20,7 @@ import { OpenTab } from "../page/open";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import Send from "../page/send";
+import StartAndStop from "../page/start-and-stop";
 
 export default function UI() {
   // const [tabs, setTabs] = useState("general");
@@ -60,9 +59,7 @@ export default function UI() {
             {/* <MainFunctions /> */}
           </CardContent>
           <CardFooter>
-            <Button className="w-full">
-              <CirclePlay /> Start Matching
-            </Button>
+            <StartAndStop />
           </CardFooter>
         </Card>
       </TabsContent>
