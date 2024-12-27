@@ -14,14 +14,21 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Copy } from "@/components/page/copy";
-import { SelectGenders } from "@/components/page/select-genders";
-import SecondaryFunctions from "@/components/page/pause";
-import Send from "@/components/page/send";
-import StartAndStop from "@/components/page/start-and-pause";
-import { OpenTab } from "@/components/page/open";
 
-export default function Home() {
+import SecondaryFunctions from "../../components/page/pause";
+import { SelectGenders } from "../../components/page/select-genders";
+import { Copy } from "../../components/page/copy";
+import { OpenTab } from "../../components/page/open";
+
+import Send from "../../components/page/send";
+import StartAndStop from "../../components/page/start-and-pause";
+
+export default function UI() {
+  // const [tabs, setTabs] = useState("general");
+  // // ?
+  // const onTabChange = (value: SetStateAction<string>) => {
+  //   setTabs(value);
+  // };
   return (
     <Tabs
       defaultValue="general"
@@ -46,7 +53,7 @@ export default function Home() {
               </div>
             </CardTitle>
             {/* <CardDescription>
-              </CardDescription> */}
+            </CardDescription> */}
           </CardHeader>
           <CardContent className="space-y-2">
             <Send />

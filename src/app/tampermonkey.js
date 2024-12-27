@@ -24,6 +24,7 @@
   container.style.zIndex = "19991999";
   container.style.cursor = "move";
   container.style.width = "400px";
+  container.style.height = "600px";
   container.style.border = "5px solid black";
   container.style.overflow = "none";
   //container.style.borderLeft = "10px solid black";
@@ -224,35 +225,63 @@ $("#user_list").css("height", "90%");
   //
   let intervalId = null;
 
-  intervalId = setInterval(() => {
-    $("#btn_random").click();
-    // warning_Black();
-    // $(".layui-layer-btn0").click();
-  }, 1000);
+  // intervalId = setInterval(() => {
+  //   $("#btn_random").click();
+  //   // warning_Black();
+  //   // $(".layui-layer-btn0").click();
+  // }, 1000);
 
   window.addEventListener(
     "message",
     function (event) {
       if (event.origin === "https://nmchat.vercel.app") {
+        // const gendersChecked = event.data.genders;
+        // console.log("Received gendersChecked:", gendersChecked);
+        // if (event.data.genders) {
+        //   const { male, female, unknown } = event.data.genders;
+        //   console.log("Male:", male);
+        //   console.log("Female:", female);
+        //   console.log("Unknown:", unknown);
+        //   console.log("Male:", event.data.genders.male);
+        //   console.log("Female:", event.data.genders.female);
+        //   console.log("Unknown:", event.data.genders.unknown);
+        // }
+
         if (event.data.state === "START") {
           intervalId = setInterval(() => {
             $("#btn_random").click();
-            warning_Black();
-            //判断逻辑
-            $(".layui-layer-btn0").click();
+            var value = $("#randomSelInfo").find("span").eq(1).text();
+            if (event.data.genders) {
+              const { male, female, unknown } = event.data.genders;
+              console.log("Male:", male);
+              console.log("Female:", female);
+              console.log("Unknown:", unknown);
+              console.log("Male:", event.data.genders.male);
+              console.log("Female:", event.data.genders.female);
+              console.log("Unknown:", event.data.genders.unknown);
+            }
+            if (
+              (value == "男" && event.data.genders.male) ||
+              (value == "女" && event.data.genders.female) ||
+              (value == "保密" && event.data.genders.unknown)
+            ) {
+              console.log(value);
+              warning_Black();
+              $(".layui-layer-btn0").click();
+            }
           }, 1000);
-        } else if (event.data.type === "PAUSE") {
+        } else if (event.data.state === "PAUSE") {
           if (intervalId !== null) {
             clearInterval(intervalId);
             intervalId = null;
           }
         }
-        // const { male, female, unknown } = data.genders;
-        // console.log("Male:", male);
-        // console.log("Female:", female);
-        // console.log("Unknown:", unknown);
       }
     },
     false
   );
 })();
+
+// console.log("Male:", male);
+// console.log("Female:", female);
+// console.log("Unknown:", unknown);
