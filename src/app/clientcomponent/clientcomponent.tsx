@@ -3,21 +3,14 @@
 import { useState, useEffect } from "react";
 
 function ClientComponent() {
-  const [userData, setUserData] = useState({
-    name: "",
-    gender: "",
-    age: "",
-    location: "",
-  });
-
   useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
+    // const handleMessage = ;
+
+    window.addEventListener("message", (event: MessageEvent) => {
       if (event.origin === "http://v1.web1v1.cn/randomdeskrynew.html") {
         const { name, gender, age, location } = event.data;
         if (event.data) {
-          // 更新状态
-          setUserData({ name, gender, age, location });
-
+          console.log(event.data);
           // 发送请求到 API 路由
           fetch("/api/test", {
             method: "POST",
@@ -40,25 +33,12 @@ function ClientComponent() {
             });
         }
       }
-    };
-
-    window.addEventListener("message", handleMessage);
-
-    // 清理事件监听器
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
+    });
+    // // 清理事件监听器
+    // return () => {
+    //   window.removeEventListener("message", handleMessage);
+    // };
   }, []);
-
-  return (
-    <div>
-      <h1>Client Component</h1>
-      <p>Name: {userData.name}</p>
-      <p>Gender: {userData.gender}</p>
-      <p>Age: {userData.age}</p>
-      <p>Location: {userData.location}</p>
-    </div>
-  );
 }
 
 export default ClientComponent;
