@@ -5,6 +5,14 @@
 // @description  Load a Next.js project hosted on Vercel into the current page
 // @author       Your Name
 // @match        *://*/*
+// @match        http://v1.70os.top/*
+// @match        http://v1.chat1v1.cn/*
+// @match        http://v1.chatbbq.cn/*
+// @match        http://v1.web1v1.cn/*
+// @match        http://v2.chatbbq.cn/*
+// @match        http://v2.henbaidu.com/*
+// @match        http://v6.nm1v1.cn/*
+// @match        http://v9.webttt.cn/*
 // @grant        none
 // ==/UserScript==
 
@@ -24,7 +32,7 @@
   container.style.zIndex = "19991999";
   container.style.cursor = "move";
   container.style.width = "400px";
-  container.style.height = "600px";
+  container.style.height = "450px";
   container.style.border = "5px solid black";
   container.style.overflow = "none";
   //container.style.borderLeft = "10px solid black";
@@ -224,52 +232,43 @@ $("#user_list").css("height", "90%");
 
   //
   let intervalId = null;
-
-  // intervalId = setInterval(() => {
-  //   $("#btn_random").click();
-  //   // warning_Black();
-  //   // $(".layui-layer-btn0").click();
-  // }, 1000);
-
+  let genders;
   window.addEventListener(
     "message",
-    function (event) {
+    (event) => {
       if (event.origin === "https://nmchat.vercel.app") {
-        // const gendersChecked = event.data.genders;
-        // console.log("Received gendersChecked:", gendersChecked);
-        // if (event.data.genders) {
-        //   const { male, female, unknown } = event.data.genders;
-        //   console.log("Male:", male);
-        //   console.log("Female:", female);
-        //   console.log("Unknown:", unknown);
-        //   console.log("Male:", event.data.genders.male);
-        //   console.log("Female:", event.data.genders.female);
-        //   console.log("Unknown:", event.data.genders.unknown);
-        // }
-
+        if (event.data.genders) {
+          genders = event.data.genders;
+        }
         if (event.data.state === "START") {
           intervalId = setInterval(() => {
             $("#btn_random").click();
-            var value = $("#randomSelInfo").find("span").eq(1).text();
-            if (event.data.genders) {
-              const { male, female, unknown } = event.data.genders;
-              console.log("Male:", male);
-              console.log("Female:", female);
-              console.log("Unknown:", unknown);
-              console.log("Male:", event.data.genders.male);
-              console.log("Female:", event.data.genders.female);
-              console.log("Unknown:", event.data.genders.unknown);
+            var name = $("#randomSelInfo").find("span").eq(0).text();
+            var gender = $("#randomSelInfo").find("span").eq(1).text();
+            var age = $("#randomSelInfo").find("span").eq(2).text();
+            var location = $("#randomSelInfo").find("span").eq(3).text();
+            // console.table([
+            //   { name: name, gender: gender, age: age, location: location },
+            // ]);
+            if (gender == "女") {
+              //console.log("name: " + name + " | gender: " + gender + " | age: " + age + " | location: " + location);
+              console.log(
+                "name: " + name + " | age: " + age + " | location: " + location
+              );
             }
             if (
-              (value == "男" && event.data.genders.male) ||
-              (value == "女" && event.data.genders.female) ||
-              (value == "保密" && event.data.genders.unknown)
+              (gender == "男" && genders.male) ||
+              (gender == "女" && genders.female) ||
+              (gender == "保密" && genders.unknown)
             ) {
-              console.log(value);
               warning_Black();
               $(".layui-layer-btn0").click();
+              container.contentWindow.postMessage(
+                { name: name, gender: gender, age: age, location: location },
+                "https://nmchat.vercel.app"
+              );
             }
-          }, 1000);
+          }, 3000);
         } else if (event.data.state === "PAUSE") {
           if (intervalId !== null) {
             clearInterval(intervalId);
@@ -281,7 +280,3 @@ $("#user_list").css("height", "90%");
     false
   );
 })();
-
-// console.log("Male:", male);
-// console.log("Female:", female);
-// console.log("Unknown:", unknown);
