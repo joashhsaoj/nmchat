@@ -1,6 +1,6 @@
 {
   "extends": ["next/core-web-vitals", "next/typescript"],
-  need to delete
+  //need to delete
   "rules": {
     "@typescript-eslint/no-unused-vars": "off" // 关闭 no-unused-vars 规则
   }

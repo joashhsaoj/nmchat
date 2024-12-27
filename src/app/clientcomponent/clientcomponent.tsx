@@ -39,6 +39,7 @@ function ClientComponent() {
     //   window.removeEventListener("message", handleMessage);
     // };
   }, []);
+  return <div>Client Component</div>;
 }
 
 export default ClientComponent;
