@@ -5,7 +5,10 @@ import { useEffect } from "react";
 function ClientComponent() {
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      if (event.origin === "http://v1.chat1v1.cn") {
+      if (
+        event.origin ===
+        "http://v1.chat1v1.cn/randomdeskrynew26h3km.html?v=26h3km"
+      ) {
         const { name, gender, age, location } = event.data;
         if (event.data) {
           // 发送请求到 API 路由
