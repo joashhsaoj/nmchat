@@ -7,7 +7,7 @@ function ClientComponent() {
     const handleMessage = (event: MessageEvent) => {
       if (
         event.origin ===
-        "http://v1.chat1v1.cn/randomdeskrynew26h3km.html?v=26h3km"
+        "*"
       ) {
         const { name, gender, age, location } = event.data;
         if (event.data) {

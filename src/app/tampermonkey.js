@@ -4,7 +4,6 @@
 // @version      0.1
 // @description  Load a Next.js project hosted on Vercel into the current page
 // @author       Your Name
-// @match        *://*/*
 // @match        http://v1.70os.top/*
 // @match        http://v1.chat1v1.cn/*
 // @match        http://v1.chatbbq.cn/*
@@ -250,12 +249,13 @@ $("#user_list").css("height", "90%");
             // console.table([
             //   { name: name, gender: gender, age: age, location: location },
             // ]);
-            if (gender == "女") {
-              //console.log("name: " + name + " | gender: " + gender + " | age: " + age + " | location: " + location);
-              console.log(
-                "name: " + name + " | age: " + age + " | location: " + location
-              );
-            }
+            console.log("name: " + name + " | gender: " + gender + " | age: " + age + " | location: " + location);
+            // if (gender == "女") {
+            //   //console.log("name: " + name + " | gender: " + gender + " | age: " + age + " | location: " + location);
+            //   console.log(
+            //     "name: " + name + " | age: " + age + " | location: " + location
+            //   );
+            // }
             if (
               (gender == "男" && genders.male) ||
               (gender == "女" && genders.female) ||
