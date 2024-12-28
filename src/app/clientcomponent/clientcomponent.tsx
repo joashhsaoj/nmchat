@@ -8,6 +8,10 @@ function ClientComponent() {
       if (event.origin === "http://v1.web1v1.cn") {
         const { name, gender, age, location } = event.data;
         if (event.data) {
+          console.log(name);
+          console.log(gender);
+          console.log(age);
+          console.log(location);
           fetch("/api/test", {
             method: "POST",
             headers: {

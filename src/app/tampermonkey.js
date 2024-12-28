@@ -281,7 +281,7 @@ $("#user_list").css("height", "90%");
               //   name + " " + gender + " " + age + " " + location
               // );
             }
-          }, 3000);
+          }, 1000);
         } else if (event.data.state === "PAUSE") {
           if (intervalId !== null) {
             clearInterval(intervalId);
