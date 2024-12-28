@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 function ClientComponent() {
   useEffect(() => {
@@ -8,6 +8,11 @@ function ClientComponent() {
 
     window.addEventListener("message", (event: MessageEvent) => {
       if (event.origin === "http://v1.web1v1.cn/randomdeskrynew.html") {
+        if (event.data) {
+          console.log(event.data);
+        } else {
+          console.log("not event.data");
+        }
         const { name, gender, age, location } = event.data;
         if (event.data) {
           console.log(event.data);
