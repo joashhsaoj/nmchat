@@ -7,11 +7,12 @@ function ClientComponent() {
     // const handleMessage = ;
 
     window.addEventListener("message", (event: MessageEvent) => {
+      window.console.log("hello");
       if (event.origin === "http://v1.web1v1.cn/randomdeskrynew.html") {
         if (event.data) {
-          console.log(event.data);
+          window.console.log(event.data);
         } else {
-          console.log("not event.data");
+          window.console.log("not event.data");
         }
         const { name, gender, age, location } = event.data;
         if (event.data) {
