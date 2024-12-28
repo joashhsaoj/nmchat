@@ -7,11 +7,7 @@ function ClientComponent() {
     // const handleMessage = ;
 
     window.addEventListener("message", (event: MessageEvent) => {
-      window.console.log("hello");
-      window.console.log("Event origin:", event.origin);
-      window.console.log("Event data:", event.data);
-
-      if (event.origin === "http://v1.web1v1.cn/randomdeskrynew.html") {
+      if (event.origin === "http://v1.web1v1.cn") {
         window.console.log("Origin matched");
 
         if (event.data) {
@@ -33,12 +29,10 @@ function ClientComponent() {
           })
             .then((response) => {
               console.log("Response status:", response.status);
-
               // 检查响应状态
               if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
               }
-
               // 解析 JSON
               return response.json();
             })
