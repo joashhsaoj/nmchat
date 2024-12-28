@@ -14,10 +14,10 @@ function ClientComponent() {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              name: "name",
-              gender: "gender",
-              age: "age",
-              location: "location",
+              name: name,
+              gender: gender,
+              age: age,
+              location: location,
             }),
           })
             .then((response) => response.json())
