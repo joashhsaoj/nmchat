@@ -8,8 +8,6 @@ function ClientComponent() {
       if (event.origin === "http://v1.web1v1.cn") {
         const { name, gender, age, location } = event.data;
         if (event.data) {
-          console.log(event.data);
-          // 发送请求到 API 路由
           fetch("/api/test", {
             method: "POST",
             headers: {
