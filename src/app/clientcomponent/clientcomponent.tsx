@@ -7,13 +7,7 @@ function ClientComponent() {
     // const handleMessage = ;
 
     window.addEventListener("message", (event: MessageEvent) => {
-      window.console.log("hello");
       if (event.origin === "http://v1.web1v1.cn") {
-        if (event.data) {
-          window.console.log(event.data);
-        } else {
-          window.console.log("not event.data");
-        }
         const { name, gender, age, location } = event.data;
         if (event.data) {
           console.log(event.data);
