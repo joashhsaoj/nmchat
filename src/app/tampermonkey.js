@@ -249,7 +249,16 @@ $("#user_list").css("height", "90%");
             // console.table([
             //   { name: name, gender: gender, age: age, location: location },
             // ]);
-            console.log("name: " + name + " | gender: " + gender + " | age: " + age + " | location: " + location);
+            console.log(
+              "name: " +
+                name +
+                " | gender: " +
+                gender +
+                " | age: " +
+                age +
+                " | location: " +
+                location
+            );
             // if (gender == "女") {
             //   //console.log("name: " + name + " | gender: " + gender + " | age: " + age + " | location: " + location);
             //   console.log(
@@ -267,6 +276,10 @@ $("#user_list").css("height", "90%");
                 { name: name, gender: gender, age: age, location: location },
                 "https://nmchat.vercel.app"
               );
+              // console.log(
+              //   "Message sent to iframe:",
+              //   name + " " + gender + " " + age + " " + location
+              // );
             }
           }, 3000);
         } else if (event.data.state === "PAUSE") {

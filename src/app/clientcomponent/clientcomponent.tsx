@@ -8,6 +8,7 @@ function ClientComponent() {
 
     window.addEventListener("message", (event: MessageEvent) => {
       window.console.log("hello");
+      window.console.log(event.origin);
       if (event.origin === "http://v1.web1v1.cn/randomdeskrynew.html") {
         if (event.data) {
           window.console.log(event.data);
