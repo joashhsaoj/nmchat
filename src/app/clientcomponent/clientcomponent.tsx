@@ -8,7 +8,7 @@ function ClientComponent() {
       if (event.origin === "http://v1.web1v1.cn") {
         const { name, gender, age, location } = event.data;
         if (event.data) {
-          fetch("/api/test", {
+          fetch("/live", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -36,7 +36,7 @@ function ClientComponent() {
     //   window.removeEventListener("message", handleMessage);
     // };
   }, []);
-  return <div>Client Component</div>;
+  return <></>;
 }
 
 export default ClientComponent;
