@@ -31,7 +31,7 @@
   container.style.zIndex = "19991999";
   container.style.cursor = "move";
   container.style.width = "400px";
-  container.style.height = "450px";
+  container.style.height = "420px";
   container.style.border = "5px solid black";
   container.style.overflow = "none";
   //container.style.borderLeft = "10px solid black";
@@ -230,6 +230,26 @@ $("#user_list").css("height", "90%");
   document.head.appendChild(script);
 
   //
+
+  $("#btn_random").click(function () {
+    sendPublic = "";
+
+    fun_loading(false);
+
+    $("#div_msgbox_first").show();
+    $("#div_msgbox").hide();
+    $("#div_privmsg").hide();
+
+    $("#div_SNSInfo").hide();
+
+    sendJson("random", "", true);
+
+    layer.close(inputStatusTips);
+    inputStatusTips = null;
+    console.log("触发");
+  });
+  $("#btn_random").click();
+
   let intervalId = null;
   let genders;
   window.addEventListener(
@@ -241,14 +261,50 @@ $("#user_list").css("height", "90%");
         }
         if (event.data.state === "START") {
           intervalId = setInterval(() => {
+            $("#ButtonRandom").click();
             $("#btn_random").click();
             var name = $("#randomSelInfo").find("span").eq(0).text();
             var gender = $("#randomSelInfo").find("span").eq(1).text();
             var age = $("#randomSelInfo").find("span").eq(2).text();
-            var location = $("#randomSelInfo").find("span").eq(3).text();
-            // console.table([
-            //   { name: name, gender: gender, age: age, location: location },
-            // ]);
+            warning_Black();
+            $(".layui-layer-btn0").click();
+            console.log(
+              "name: " + name + " | gender: " + gender + " | age: " + age
+            );
+
+            var name = $("#randomSelInfo").find("span").eq(0).text();
+            console.log(name);
+
+            // 点击按钮
+            $("#btn_random").click();
+
+            // 初始值
+            let initialValue = $("#randomSelInfo").find("span").eq(0).text();
+
+            // 每100毫秒检测一次
+            let intervalId = setInterval(function checkValue() {
+              let currentValue = $("#randomSelInfo").find("span").eq(0).text();
+              if (currentValue !== initialValue) {
+                console.log("值发生了变化:", currentValue);
+                clearInterval(intervalId); // 停止检测
+              }
+            }, 100);
+
+            setTimeout(function () {
+              warning_Black();
+              $(".layui-layer-btn0").click();
+              var name = $("#randomSelInfo").find("span").eq(0).text();
+              var gender = $("#randomSelInfo").find("span").eq(1).text();
+              var age = $("#randomSelInfo").find("span").eq(2).text();
+              console.log(
+                "name: " + name + " | gender: " + gender + " | age: " + age
+              );
+            }, 90);
+
+            // var name = $("#randomSelInfo").find("span").eq(0).text();
+            // var gender = $("#randomSelInfo").find("span").eq(1).text();
+            // var age = $("#randomSelInfo").find("span").eq(2).text();
+            // //var location = $("#randomSelInfo").find("span").eq(3).text();
             // console.log(
             //   "name: " +
             //     name +
@@ -259,27 +315,34 @@ $("#user_list").css("height", "90%");
             //     " | location: " +
             //     location
             // );
+            // const now = new Date();
+            // console.log(now); // 输出当前日期和时间
+            // console.table([
+            //   { name: name, gender: gender, age: age, location: location },
+            // ]);
             // if (gender == "女") {
-            //   //console.log("name: " + name + " | gender: " + gender + " | age: " + age + " | location: " + location);
-            //   console.log(
-            //     "name: " + name + " | age: " + age + " | location: " + location
+            //   container.contentWindow.postMessage(
+            //     { name: name, age: age, location: location },
+            //     "https://nmchat.vercel.app"
             //   );
+            //   //console.log("name: " + name + " | gender: " + gender + " | age: " + age + " | location: " + location);
+            //   // console.log(
+            //   //   "name: " + name + " | age: " + age + " | location: " + location
+            //   // );
             // }
             if (
               (gender == "男" && genders.male) ||
               (gender == "女" && genders.female) ||
               (gender == "保密" && genders.unknown)
             ) {
+              console.log("1");
               warning_Black();
               $(".layui-layer-btn0").click();
-              container.contentWindow.postMessage(
-                { name: name, gender: gender, age: age, location: location },
-                "https://nmchat.vercel.app"
-              );
-              // console.log(
-              //   "Message sent to iframe:",
-              //   name + " " + gender + " " + age + " " + location
-              // );
+            } else {
+              console.log("2");
+              event.data.state = "PAUSE";
+              clearInterval(intervalId);
+              intervalId = null;
             }
           }, 1000);
         } else if (event.data.state === "PAUSE") {
