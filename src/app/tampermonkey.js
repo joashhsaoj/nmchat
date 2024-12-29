@@ -249,16 +249,16 @@ $("#user_list").css("height", "90%");
             // console.table([
             //   { name: name, gender: gender, age: age, location: location },
             // ]);
-            console.log(
-              "name: " +
-                name +
-                " | gender: " +
-                gender +
-                " | age: " +
-                age +
-                " | location: " +
-                location
-            );
+            // console.log(
+            //   "name: " +
+            //     name +
+            //     " | gender: " +
+            //     gender +
+            //     " | age: " +
+            //     age +
+            //     " | location: " +
+            //     location
+            // );
             // if (gender == "女") {
             //   //console.log("name: " + name + " | gender: " + gender + " | age: " + age + " | location: " + location);
             //   console.log(

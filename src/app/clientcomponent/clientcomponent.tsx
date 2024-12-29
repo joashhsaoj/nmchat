@@ -1,33 +1,24 @@
 import { useEffect } from "react";
 
+import { createClient } from "@/utils/supabase/server";
+
 function ClientComponent() {
   useEffect(() => {
     // const handleMessage = ;
 
-    window.addEventListener("message", (event: MessageEvent) => {
+    window.addEventListener("message", async (event: MessageEvent) => {
       if (event.origin === "http://v1.web1v1.cn") {
         const { name, gender, age, location } = event.data;
         if (event.data) {
-          fetch("/live", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: name,
-              gender: gender,
-              age: age,
-              location: location,
-            }),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log("Data added:", data);
-            })
-            .catch((error) => {
-              console.error("Error adding data:", error);
-            });
-          console.log(name, gender, age, location);
+          const supabase = await createClient();
+          const { data, error } = await supabase
+            .from("test")
+            .insert([{ name, gender, age, location }]);
+          if (error) {
+            console.error("Error adding data:", error);
+          } else {
+            console.log("Data added:", data);
+          }
         }
       }
     });
